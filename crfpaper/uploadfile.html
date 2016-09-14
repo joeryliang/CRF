@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>上传文件</title>
+		<script type="text/javascript" src="dialog/zDialog.js"></script>
+		<script type="text/javascript" src="dialog/zDrag.js"></script> 
+	</head>
+	<body>
+		<button value="上传" onclick="upload();">上传</button>
+	</body>
+</html>
+<script >
+	IMAGESPATH="dialog/images/"
+	function upload(){
+		var diag = new Dialog();
+		diag.Width = 300;
+		diag.Height = 100;
+		diag.Title = "内容页为html代码的窗口";
+		diag.InnerHtml='<div style="text-align:center;color:red;font-size:14px;">直接输出html，使用 <b>InnerHtml</b> 属性。</div>'
+		diag.OKEvent = function(){diag.close();};//点击确定后调用的方法
+		diag.show();
+	}
+</script>

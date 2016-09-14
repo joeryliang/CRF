@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title style="overflow:auto"></title>
+	</head>
+	<body>
+		
+	</body>
+</html>
+<script>
+	//根据传入的组名，判断在新的数组内是否存在该组，如果存在，返回该对象,否则返回false
+	function isexistgroup(groupname){
+			for(var i=0;i<newtestjson.length;i++)
+			{
+				if(newtestjson[i].groupname == groupname)
+				{
+					return newtestjson[i];
+				}
+			}
+			return false;
+	}
+	
+	
+	var testjson = [{"groupname":"水果","id":1,"name":"苹果"},{"groupname":"水果","id":2,"name":"香焦"},{"groupname":"蔬菜","id":3,"name":"小白菜"},{"groupname":"蔬菜","id":4,"name":"油麦菜"}];
+	
+	//使用新数组，最后通用循环新数据加载到界面select里面
+	//生成后的数据结果将如下:   [{"groupname":"水果","data":[{"groupname":"水果","id":1,"name":"苹果"},{"groupname":"水果","id":2,"name":"香焦"}]},{"data":[{"groupname":"蔬菜","id":3,"name":"小白菜"},{"groupname":"蔬菜","id":4,"name":"油麦菜"}]}];
+	var newtestjson = [];
+	
+	
+	//开始处理原始json,生成新的结构
+	for(var i=0;i<testjson.length;i++)
+	{
+		
+		var exist = isexistgroup(testjson[i].groupname);
+		if(exist == false)
+		{
+			//说明新数组内不存在
+			//创建一个json,并加入到新数组
+			var newjson = {"groupname":testjson[i].groupname,"data":[testjson[i]]};
+			newtestjson.push(newjson);
+		}
+		else
+		{
+			//说明新数组内存在该分组，则将json数据增加到data数组内
+			exist.data.push(testjson[i]);
+		}
+	}
+	
+	
+	//输出新数组看一下结构
+	console.log(newtestjson);
+	
+	
+	
+</script>

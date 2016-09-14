@@ -1,0 +1,143 @@
+血糖(B):空腹血糖<script>
+jQuery(document).ready(function($)
+{
+ //计算能量推荐摄入量
+ $("#imgBtnTJSRL").click(function(){
+  var sectionlabel = "风险率";
+  askcrf.getresult(sectionlabel);
+  var mustanswerresult = askcrf.checkmustanswer(sectionlabel,"nianling,xingbie");
+  if(mustanswerresult.length > 0) {
+   $("#errormsg").html(mustanswerresult);
+   return;
+  } else {
+   $("#errormsg").html("");
+  }
+  //获取结果部分
+  var nianling =  askcrf.getresultbylabel(sectionlabel,"nianling");
+  var xingbie =  askcrf.getresultbylabel(sectionlabel,"xingbie");
+  
+  
+  
+  //===============================================//
+  sectionlabel = "风险评估";
+  askcrf.getresult(sectionlabel);
+  var mustanswerresult = askcrf.checkmustanswer(sectionlabel,"huodongqiangdu,yinshi");
+  if(mustanswerresult.length > 0) {
+   $("#errormsg").html(mustanswerresult);
+   return;
+  } else {
+   $("#errormsg").html("");
+  }
+  
+  //获取结果部分
+  var huodongqiangdu =  askcrf.getresultbylabel(sectionlabel,"huodongqiangdu");
+  var yinshi =  askcrf.getresultbylabel(sectionlabel,"yinshi");
+  
+  var PAL=0;
+  
+  if(nianling<60 && xingbie==1 && huodongqiangdu==2)
+  {
+   PAL=1.55;
+  }
+  else if(nianling<60 && xingbie==1 && huodongqiangdu==3)
+  {
+   PAL=1.78;
+  }
+  else if(nianling<60 && xingbie==1 && huodongqiangdu==4)
+  {
+   PAL=2.10;
+  }
+  else if(nianling<60 && xingbie==2 && huodongqiangdu==2)
+  {
+   PAL=1.56;
+  }
+  else if(nianling<60 && xingbie==2 && huodongqiangdu==3)
+  {
+   PAL=1.64;
+  }
+  else if(nianling<60 && xingbie==2 && huodongqiangdu==4)
+  {
+   PAL=1.82;
+  }
+  else if(nianling>=60 && nianling<70  && xingbie==1 && huodongqiangdu==2)
+  {
+   PAL=1.53;
+  }
+  else if(nianling>=60 && nianling<70  && xingbie==1 && huodongqiangdu==3)
+  {
+   PAL=1.66;
+  }
+  else if(nianling>=60 && nianling<70  && xingbie==2 && huodongqiangdu==2)
+  {
+   PAL=1.54;
+  }
+  else if(nianling>=60 && nianling<70  && xingbie==2 && huodongqiangdu==3)
+  {
+   PAL=1.64;
+  }
+  
+  else if(nianling>=70 && nianling<80  && xingbie==1 && huodongqiangdu==2)
+  {
+   PAL=1.51;
+  }
+  else if(nianling>=70 && nianling<80  && xingbie==1 && huodongqiangdu==3)
+  {
+   PAL=1.64;
+  }
+  else if(nianling>=70 && nianling<80  && xingbie==2 && huodongqiangdu==2)
+  {
+   PAL=1.51;
+  }
+  else if(nianling>=70 && nianling<80  && xingbie==2 && huodongqiangdu==3)
+  {
+   PAL=1.62;
+  }
+  
+  else if(nianling>=80  && xingbie==1 && huodongqiangdu==2)
+  {
+   PAL=1.49;
+  }
+  else if(nianling>=80  && xingbie==2 && huodongqiangdu==2)
+  {
+   PAL=1.49;
+  }
+  
+  var TJNLSR = PAL*safefloat(yinshi,0); //推荐能量摄入
+  $("#zheruliang").val(safefloatget4(TJNLSR,0));
+ });
+});
+</script>
+
+
+
+餐后2h血糖：<script>
+jQuery(document).ready(function($)
+{
+ //运动后心率范围
+ $("#imgBtnydhxlfw").click(function(){
+  var sectionlabel = "风险率";
+  askcrf.getresult(sectionlabel);
+  var mustanswerresult = askcrf.checkmustanswer(sectionlabel,"nianling");
+  if(mustanswerresult.length > 0) {
+   $("#errormsg").html(mustanswerresult);
+   return;
+  } else {
+   $("#errormsg").html("");
+  }
+  //获取结果部分
+  var nianling =  askcrf.getresultbylabel(sectionlabel,"nianling");
+  
+  var xinludixian = (220-safeint(nianling,0))*0.5;
+  var xinlugaoxian = (220-safeint(nianling,0))*0.85;
+  $("#yundonghouxinlvfanwei").val(safefloatget4(xinludixian,0)+"~"+safefloatget4(xinlugaoxian,0));
+ });
+});
+</script>
+
+
+<script>
+jQuery(document).ready(function($){
+	$("#usertitle").css({"width":"500px"});
+	$("#usercontent").css({"width":"500px","height":"400px"});
+});
+</script>

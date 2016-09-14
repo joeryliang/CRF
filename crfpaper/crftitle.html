@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+
+		<link rel="stylesheet" href="css/styles.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/skins/aqua/theme.css" title="Aqua">
+		<!--<link rel="stylesheet" href="css/print.css" />-->
+
+		<script type="text/javascript" src="js/Tabs.js"></script>
+		<script type="text/javascript" src="js/json2.js"></script>
+		<script type="text/javascript" src="js/askglobalfunction.js"></script>
+		<script type="text/javascript" src="js/lang/zh-cn.js"></script>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/askitems.js"></script>
+		<script type="text/javascript" src="js/askgroups.js"></script>
+		<script type="text/javascript" src="js/asksections.js"></script>
+		<script type="text/javascript" src="js/askcrf.js"></script>
+		<script type="text/javascript" src="js/askexpression.js"></script>
+		<style>
+
+		</style>
+	</head>
+
+	<body>
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tbody>
+				<tr>
+					<td align="right" valign="middle" style="padding-left: 12px; display: none" id="TabsBack">
+						<a href="javascript:" onclick="TabsBack(this)"><img src="images/arrow_back.gif" border="0" style="margin-top:10px"></a>
+					</td>
+					<td align="right" style="padding-left: 12px" id="TabsBackDis">
+						<img src="http://192.168.8.41:8080/OC/images/arrow_back_dis.gif" border="0"></td>
+
+					<td class="crfHeaderTabs" valign="bottom" id="Tab1">
+						<div id="Tab2NotSelected" style="display:all">
+							<div class="tab_BG">
+								<div class="tab_L">
+									<div class="tab_R"><span class="tabtext">风险率 2 <span id="secNumItemsCom1" style="font-weight: normal;">(0/0)</span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td class="crfHeaderTabs" valign="bottom" id="Tab2">
+						<div id="Tab2NotSelected" style="display:all">
+							<div class="tab_BG_h">
+								<div class="tab_L_h">
+									<div class="tab_R_h"><span class="tabtext">风险率 2 <span id="secNumItemsCom1" style="font-weight: normal;">(0/0)</span></span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td class="crfHeaderTabs" valign="bottom" id="Tab3">
+						<div id="Tab1NotSelected" style="display:all">
+							<div class="tab_BG">
+								<div class="tab_L">
+									<div class="tab_R">
+										<a class="tabtext" title="风险率 3" href="javascript:loadcrf('风险率')">风险率 3 <span id="secNumItemsCom0" style="font-weight: normal;">(0/7)</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+					<td class="crfHeaderTabs" valign="bottom" id="Tab4">
+						<div id="Tab1NotSelected" style="display:none">
+							<div class="tab_BG">
+								<div class="tab_L">
+									<div class="tab_R">
+										<a class="tabtext" title="风险率 1" href="javascript:loadcrf('风险率')">风险率 4<span id="secNumItemsCom0" style="font-weight: normal;">(0/7)</span></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</td>
+					
+					<td align="right" id="TabsNextDis" style="display: none"><img src="images/arrow_next_dis.gif" border="0"></td>
+					<td align="right" id="TabsNext">
+						<a href="javascript:" onclick="TabsForward(this)"><img src="http://192.168.8.41:8080/OC/images/arrow_next.gif" border="0" style="margin-top:10px;margin-right:6px"></a>
+					</td>
+					<td>
+						<div class="formfieldM_BG_noMargin">
+							<select class="formfieldM" name="sectionSelect" size="1" onchange="changecrftab(this);">
+								<option selected="">-- 选择跳转到 --</option>
+								<option value="Tab1">风险率1</option>
+								<option value="Tab2">风险率2</option>
+								<option value="Tab3">风险率3</option>
+								<option value="Tab4">风险率4</option>
+							</select>
+						</div>
+					</td>
+
+				</tr>
+			</tbody>
+		</table>
+	</body>
+
+</html>
+
+<script>
+	function loadcrf(labelname) {
+		alert(labelname);
+	}
+</script>

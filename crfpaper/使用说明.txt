@@ -1,0 +1,152 @@
+1.需要引入的样式文件
+
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" type="text/css" media="all" href="css/skins/aqua/theme.css" title="Aqua">
+
+2。需要引入的js文件
+<script type="text/javascript" src="js/askglobalfunction.js" ></script>
+<script type="text/javascript" src="js/lang/zh-cn.js" ></script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/askitems.js"></script>
+<script type="text/javascript" src="js/askgroups.js"></script>
+<script type="text/javascript" src="js/asksections.js"></script>
+<script type="text/javascript" src="js/askcrf.js"></script>
+
+3.需要创建askcrf对象，创建方法如下
+
+无参创建
+var askcrf = new askcrf();
+
+有参创建,option为json对象
+var askcrf = new askcrf(option);
+
+option说明
+{
+	"isshowtitle":true,		//是否显示标题，默认为显示
+	"ishowtoptools":true,     //是否显示顶部工具条，默认为显示
+	"isshowbottomtools":true  //是否显示底部工具条，默认为显示
+}
+
+
+创建示例如下：
+var askcrf = new askcrf({"isshowbottomtools":true,"isshowtoptools":false,"isshowtitle":false});
+
+
+4.根据crf的json格式数据，解析出crf结构，如下:
+askcrf.initcrf(paper.data);
+说明:paper.data是我的json数据，请根据你的json数据传入即可。
+
+
+5。这时就可以调用buildcrf生成html,将生成的crf问卷显示到想要的元素内。这里我追加到页面的body里面，如下
+var crfhtml = askcrf.buildcrf("");
+$(document.body).append(crfhtml);
+
+
+6.根据自己的业务情况，处理保存 savecrf(sectionlabel)方法。
+如下：
+function savecrf(sectionlabel) {
+	//获取dom结果
+	askcrf.getresult(sectionlabel);
+
+	//校验必答题是否都回答了，如果长度大于0,说明有未答问题
+	var mustanswerresult = askcrf.checkmustanswer(sectionlabel);
+	if(mustanswerresult.length > 0) {
+		$("#errormsg").html(mustanswerresult);
+		return;
+	} else {
+		$("#errormsg").html("");
+	}
+	
+	var resultjson = askcrf.buildcrfresult(sectionlabel);
+	console.log(resultjson);
+	
+}
+
+7.根据自己的业务情况，处理取消cancelcrf(sectionlabel)。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//我们自己的crf，拥有如下更易用功能
+
+1.获取结果存储到结构内
+var sectionlabel = "风险率";
+askcrf.getresult(sectionlabel);
+
+
+2。可以进行必填校验。代码如下：
+	var mustanswerresult = askcrf.checkmustanswer(sectionlabel);
+	if(mustanswerresult.length > 0) {
+		$("#errormsg").html(mustanswerresult);
+		return;
+	} else {
+		$("#errormsg").html("");
+	}
+		
+3.以上为全部必填校验，可以使和如下方式仅关注需要的变量必填校验.各label间使用逗号分隔
+var mustanswerresult = askcrf.checkmustanswer(sectionlabel,"nianling,xingbie");
+	if(mustanswerresult.length > 0) {
+		$("#errormsg").html(mustanswerresult);
+		return;
+	} else {
+		$("#errormsg").html("");
+	}
+
+4.可以方便的获取某个问题的结果值，代码如下
+var xingming = askcrf.getresultbylabel(sectionlabel,"nianling");
+
+
+5.指定某一个问题为只读状态，用于文本题。
+setlabelreadonly(labelname);
+如:
+setlabelreadonly("nianling");
+
+
+6.设置指定文本框可输入指定的最大值和最小值
+askcrf.setquestionmaxvalue(labelname,maxvalue);
+askcrf.setquestionminvalue(labelname,minvalue);
+函数返回boolean值，如果找到指定的标签问题并设置为真，返回true,如果没有找到，则返回false.是否需要进行后续处理，可根据自己的需要进行控制。
+
+举例：年龄仅能输入0-100岁，可以如下设定
+askcrf.setquestionmaxvalue("nianling",100);
+askcrf.setquestionminvalue("nianling",0);
+
+
+7。可以进行必填校验。可以校验指定集合下某几项必填：
+	labelnames 需要校验的问题标签，使用逗号分隔。
+	mustnumber 必填项的个数，如果满足指定个数的必填项，则不反回错误信息。否则输出错误信息
+	var mustanswerresult = askcrf.checkmustanswerbynum(labelnames,mustnumber);
+	if(mustanswerresult.length > 0) {
+		$("#errormsg").html(mustanswerresult);
+		return;
+	} else {
+		$("#errormsg").html("");
+	}
+	
+
+
+
+//通用crf，最简单的通用引入方法
+创建对象
+	var askcrf = new askcrf({
+		"isshowbottomtools": true,
+		"isshowtoptools": true,
+		"isshowtitle": true
+	});
+	
+	2.初始化
+	askcrf.initcrf(paper.data);
+	
+	3.显示到指定的容器,传入容器id
+	askcrf.showcrf("content");
